@@ -43,7 +43,15 @@ int main(int argc, char *argv[])
 		{
 			pall(&stack, line_number);
 		}
-		free(line); /*libera el bufer de la linea asignada*/
+		else
+		{
+			fprintf(stderr, "L%lu: unknown instruction %s\n", line_number, opcode);
+			fclose(file);
+			free(line);
+			free_dlistint(stack);
+			exit(EXIT_FAILURE);
+		}
+		free(line);
 		line = NULL;
 	}
 	free_dlistint(stack);
