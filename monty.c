@@ -55,6 +55,10 @@ int main(int argc, char *argv[])
 		{
 			pall(&stack, line_number);
 		}
+		else if (strcmp(opcode, "pint") == 0)
+		{
+			pint(&stack, line_number);
+		}
 		else
 		{
 			fprintf(stderr, "L%lu: unknown instruction %s\n", line_number, opcode);
@@ -107,6 +111,20 @@ void pall(stack_t **stack, unsigned int line_number)
 		current = current->next;
 	}
 }
+
+/**
+ * pint - Prints the first values on the stack
+ * @stack: Pointer to the stack
+ * @line_number: Line number in the script
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current = *stack;
+	(void)line_number; /*Parametro no utilizado*/
+
+	printf("%d\n", current->n);
+}
+
 /**
  * free_dlistint - function that frees a list
  * @head: pointer to the header of the nodes
