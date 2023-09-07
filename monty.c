@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 		{
 			if (stack == NULL)
 			{
-				fprintf(stderr, "L%lu: can't pop, stack empty\n", line_number);
+				fprintf(stderr, "L%lu: can't pop an empty stack\n", line_number);
 				fclose(file);
 				exit(EXIT_FAILURE);
 			}
