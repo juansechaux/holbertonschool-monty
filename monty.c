@@ -76,6 +76,16 @@ int main(int argc, char *argv[])
 
 			 pop(&stack, line_number);
 		}
+		else if (strcmp(opcode, "swap") == 0)
+		{
+			size_t num_of_nodes = dlistint_len(stack);
+			if (num_of_nodes < 2)
+			{
+				fprintf(stderr, "L%lu: can't swap, stack too short\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			swap(&stack, line_number);
+		}		
 		else
 		{
 			fprintf(stderr, "L%lu: unknown instruction %s\n", line_number, opcode);
@@ -159,6 +169,25 @@ void pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
+ * pop - removes the first values on the stack
+ * @stack: Pointer to the stack
+ * @line_number: Line number in the script
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node_to_swap = *stack;
+	(void)line_number;/*Parametro no Utilizado*/
+
+	*stack = node_to_swap->next;
+	(*stack)->prev = NULL;
+	node_to_swap->prev = (*stack)->next->prev;
+	(*stack)->next->prev = node_to_swap;
+	node_to_swap->next = (*stack)->next;
+	(*stack)->next = node_to_swap;
+
+}
+
+/**
  * free_dlistint - function that frees a list
  * @head: pointer to the header of the nodes
  * Return: void
@@ -172,4 +201,22 @@ void free_dlistint(stack_t *stack)
 		stack = stack->next;
 		free(tmp);
 	}
+}
+/**
+ * dlistint_len - function that returns the number of elements in a linked list
+ * @h: pointer to the header of the nodes
+ * Return: the numbers of nodes
+ */
+
+size_t dlistint_len(const stack_t *stack)
+{
+	size_t i = 0;
+	const stack_t *actual = stack;
+
+	while (actual != NULL)
+	{
+		actual = actual->next;
+		i++;
+	}
+	return (i);
 }
