@@ -57,6 +57,12 @@ int main(int argc, char *argv[])
 		}
 		else if (strcmp(opcode, "pint") == 0)
 		{
+			if (stack == NULL)
+			{
+				fprintf(stderr, "L%lu: can't pint, stack empty\n", line_number);
+				fclose(file);
+				exit(EXIT_FAILURE);
+			}
 			pint(&stack, line_number);
 		}
 		else
