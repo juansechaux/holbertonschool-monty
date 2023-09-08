@@ -191,27 +191,12 @@ void pop(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *node_to_swap = *stack;
+	int tmp;
 	(void)line_number;/*Parametro no Utilizado*/
-	int num_of_nodes = dlistint_len(*stack);
 
-	if (num_of_nodes >=3)
-	{
-		*stack = node_to_swap->next;
-		(*stack)->prev = NULL;
-		node_to_swap->prev = (*stack)->next->prev;
-		(*stack)->next->prev = node_to_swap;
-		node_to_swap->next = (*stack)->next;
-		(*stack)->next = node_to_swap;
-	}
-	else
-	{
-		*stack = node_to_swap->next;
-		(*stack)->prev = NULL;
-		node_to_swap->prev = node_to_swap->next;
-		(*stack)->next = node_to_swap;
-		node_to_swap->next = NULL;
-	}
+	tmp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = tmp;
 
 }
 
