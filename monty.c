@@ -83,8 +83,8 @@ int main(int argc, char *argv[])
 				fprintf(stderr, "L%lu: can't swap, stack too short\n", line_number);
 				fclose(file);
 				free_dlistint(stack);
-		                free(line);
-		                exit(EXIT_FAILURE);
+				free(line);
+				exit(EXIT_FAILURE);
 			}
 			swap(&stack, line_number);
 		}
@@ -129,6 +129,7 @@ void push(stack_t **stack, int value)
 {
 	stack_t *new_node;
 	new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -194,6 +195,7 @@ void pop(stack_t **stack, unsigned int line_number)
 void free_dlistint(stack_t *stack)
 {
 	stack_t *tmp;
+
 	while (stack != NULL)
 	{
 		tmp = stack;
