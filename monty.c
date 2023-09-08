@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 
 /**
  * free_dlistint - function that frees a list
- * @head: pointer to the header of the nodes
+ * @stack: pointer to the header of the nodes
  * Return: void
  */
 void free_dlistint(stack_t *stack)
@@ -138,24 +138,6 @@ void free_dlistint(stack_t *stack)
 		stack = stack->next;
 		free(tmp);
 	}
-}
-
-/**
- * swap - Swaps the top two elements of the stack
- * @stack: Puntero a la pila
- * @line_number: Número de línea en el script
- */
-void swap(stack_t **stack, unsigned int line_number)
-{
-	if (*stack == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	int tmp = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = tmp;
 }
 
 /**
